@@ -3,12 +3,13 @@ CONFIG_HAVE_DOT_CONFIG=y
 CONFIG_ALL_NONSHARED=y
 CONFIG_ALL_KMODS=y
 
-#机型选择
+# 架构选择
 CONFIG_TARGET_x86=y
 CONFIG_TARGET_x86_64=y
 CONFIG_TARGET_x86_64_Generic=y
 
-#镜像设置
+# 镜像设置
+
 CONFIG_TARGET_ROOTFS_EXT4FS=y
 CONFIG_TARGET_ROOTFS_SQUASHFS=y
 CONFIG_GRUB_IMAGES=y
@@ -20,23 +21,31 @@ CONFIG_EFI_IMAGES=y
 CONFIG_TARGET_IMAGES_PAD=y
 CONFIG_TARGET_IMAGES_GZIP=y
 
-#设置分区大小
+# 分区
 CONFIG_TARGET_KERNEL_PARTSIZE=16
 CONFIG_TARGET_ROOTFS_PARTSIZE=496
 
-#额外包
+# 编译选项
+CONFIG_DEVEL=y
+CONFIG_AUTOREMOVE=y
+CONFIG_BUILDBOT=y
+CONFIG_IB=y
+CONFIG_SDK=y
+CONFIG_IMAGEOPT=y
+CONFIG_JSON_OVERVIEW_IMAGE_INFO=y
+CONFIG_KERNEL_BUILD_DOMAIN="buildhost"
+CONFIG_KERNEL_BUILD_USER="builder"
 
+# 额外包
 CONFIG_PACKAGE_autocore-x86=y
-CONFIG_PACKAGE_automount=m
+CONFIG_PACKAGE_automount=y
 CONFIG_PACKAGE_autosamba=m
 CONFIG_PACKAGE_ipv6helper=y
 CONFIG_PACKAGE_nginx=m
 CONFIG_PACKAGE_nginx-mod-luci-ssl=m
 CONFIG_PACKAGE_nginx-util=m
 
-
 # Firmware
-
 CONFIG_PACKAGE_aircard-pcmcia-firmware=m
 CONFIG_PACKAGE_amd64-microcode=m
 CONFIG_PACKAGE_amdgpu-firmware=m
@@ -75,7 +84,6 @@ CONFIG_PACKAGE_ath10k-firmware-qca99x0-ct-htt=m
 CONFIG_PACKAGE_ath6k-firmware=m
 CONFIG_PACKAGE_ath9k-htc-firmware=y
 CONFIG_PACKAGE_b43legacy-firmware=m
-CONFIG_B43LEGACY_FW_SQUASH=y
 CONFIG_PACKAGE_bnx2-firmware=y
 CONFIG_PACKAGE_bnx2x-firmware=m
 CONFIG_PACKAGE_brcmfmac-firmware-4329-sdio=m
@@ -154,7 +162,7 @@ CONFIG_PACKAGE_r8169-firmware=m
 CONFIG_PACKAGE_radeon-firmware=m
 CONFIG_PACKAGE_rs9113-firmware=m
 CONFIG_PACKAGE_rt2800-pci-firmware=m
-CONFIG_PACKAGE_rt2800-usb-firmware=m
+CONFIG_PACKAGE_rt2800-usb-firmware=y
 CONFIG_PACKAGE_rt61-pci-firmware=m
 CONFIG_PACKAGE_rt73-usb-firmware=m
 CONFIG_PACKAGE_rtl8188eu-firmware=m
@@ -177,8 +185,8 @@ CONFIG_PACKAGE_wireless-regdb=y
 CONFIG_PACKAGE_wl12xx-firmware=m
 CONFIG_PACKAGE_wl18xx-firmware=m
 
-#插件选择
 
+# Luci插件
 CONFIG_PACKAGE_luci-app-accesscontrol=m
 CONFIG_PACKAGE_luci-app-acme=m
 CONFIG_PACKAGE_luci-app-adblock=m
@@ -224,9 +232,13 @@ CONFIG_PACKAGE_luci-app-diag-core=m
 CONFIG_PACKAGE_luci-app-diskman=m
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
+
+CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
+CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_mdadm=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_raid456=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_linear=y
+
 CONFIG_PACKAGE_luci-app-dnscrypt-proxy=m
 CONFIG_PACKAGE_luci-app-dnsforwarder=m
 CONFIG_PACKAGE_luci-app-docker=m
@@ -295,7 +307,7 @@ CONFIG_PACKAGE_luci-app-passwall=m
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks is not set
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Server is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Server is not set
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
@@ -352,13 +364,14 @@ CONFIG_PACKAGE_luci-app-ssr-plus=m
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2 is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks is not set
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust=y
-# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR is not set
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_Obfs is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin is not set
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
 
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
 CONFIG_PACKAGE_luci-app-ssrserver-python=m
 CONFIG_PACKAGE_luci-app-statistics=m
 CONFIG_PACKAGE_luci-app-syncdial=m
@@ -372,16 +385,17 @@ CONFIG_PACKAGE_luci-app-travelmate=m
 CONFIG_PACKAGE_luci-app-trojan-server=m
 CONFIG_PACKAGE_luci-app-ttyd=m
 CONFIG_PACKAGE_luci-app-turboacc=m
+
 CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_flow-offload=y
-# CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_shortcut-fe is not set
 CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_bbr-cca=y
 CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_dnsforwarder=y
+
 CONFIG_PACKAGE_luci-app-udp2raw=m
 CONFIG_PACKAGE_luci-app-udpxy=m
 CONFIG_PACKAGE_luci-app-uhttpd=m
 CONFIG_PACKAGE_luci-app-unblockmusic=m
-# CONFIG_UnblockNeteaseMusic_Go is not set
-# CONFIG_UnblockNeteaseMusic_NodeJS is not set
+CONFIG_UnblockNeteaseMusic_Go=y
+CONFIG_UnblockNeteaseMusic_NodeJS=y
 CONFIG_PACKAGE_luci-app-unblockneteasemusic=m
 CONFIG_PACKAGE_luci-app-unblockneteasemusic-go=m
 CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=m
@@ -400,10 +414,10 @@ CONFIG_PACKAGE_luci-app-vsftpd=m
 CONFIG_PACKAGE_luci-app-vssr=m
 
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun is not set
-# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server is not set
-# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan is not set
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
-# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray_plugin is not set
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray_plugin=y
 
 CONFIG_PACKAGE_luci-app-watchcat=m
 CONFIG_PACKAGE_luci-app-webadmin=m
@@ -415,6 +429,7 @@ CONFIG_PACKAGE_luci-app-wol=m
 CONFIG_PACKAGE_luci-app-wrtbwmon=m
 CONFIG_PACKAGE_luci-app-xlnetacc=m
 CONFIG_PACKAGE_luci-app-zerotier=m
+
 
 # 主题
 CONFIG_PACKAGE_luci-theme-Butterfly=m
@@ -439,8 +454,8 @@ CONFIG_PACKAGE_luci-theme-opentomato=m
 CONFIG_PACKAGE_luci-theme-opentomcat=m
 CONFIG_PACKAGE_luci-theme-rosy=m
 
-# 协议
 
+# 协议
 CONFIG_PACKAGE_luci-proto-3g=m
 CONFIG_PACKAGE_luci-proto-bonding=m
 CONFIG_PACKAGE_luci-proto-ipip=m
@@ -455,19 +470,32 @@ CONFIG_PACKAGE_luci-proto-relay=m
 CONFIG_PACKAGE_luci-proto-vpnc=m
 CONFIG_PACKAGE_luci-proto-wireguard=m
 
+
+
+# Luci库
+CONFIG_PACKAGE_luci-lib-docker=m
+CONFIG_PACKAGE_luci-lib-dracula=m
+CONFIG_PACKAGE_luci-lib-httpclient=m
+CONFIG_PACKAGE_luci-lib-httpprotoutils=m
+CONFIG_PACKAGE_luci-lib-ip=y
+CONFIG_PACKAGE_luci-lib-iptparser=m
+CONFIG_PACKAGE_luci-lib-jquery-1-4=m
+CONFIG_PACKAGE_luci-lib-json=m
+CONFIG_PACKAGE_luci-lib-jsonc=y
+CONFIG_PACKAGE_luci-lib-luaneightbl=m
+CONFIG_PACKAGE_luci-lib-nixio=y
+CONFIG_PACKAGE_luci-lib-px5g=m
+
 # 防火墙
 
 CONFIG_PACKAGE_arptables=m
-CONFIG_PACKAGE_conntrack=m
-CONFIG_PACKAGE_conntrackd=m
 CONFIG_PACKAGE_ebtables=m
 CONFIG_PACKAGE_ebtables-utils=m
 CONFIG_PACKAGE_fwknop=m
 CONFIG_PACKAGE_fwknopd=m
 CONFIG_PACKAGE_ip6tables=y
 CONFIG_PACKAGE_ip6tables-extra=m
-CONFIG_PACKAGE_ip6tables-mod-nat=m
-CONFIG_PACKAGE_ip6tables-nft=m
+CONFIG_PACKAGE_ip6tables-mod-nat=y
 CONFIG_PACKAGE_iptables=y
 CONFIG_IPTABLES_CONNLABEL=y
 CONFIG_IPTABLES_NFTABLES=y
@@ -478,7 +506,6 @@ CONFIG_PACKAGE_iptables-mod-cluster=m
 CONFIG_PACKAGE_iptables-mod-clusterip=m
 CONFIG_PACKAGE_iptables-mod-condition=m
 CONFIG_PACKAGE_iptables-mod-conntrack-extra=m
-CONFIG_PACKAGE_iptables-mod-conntrack-label=y
 CONFIG_PACKAGE_iptables-mod-delude=m
 CONFIG_PACKAGE_iptables-mod-dhcpmac=m
 CONFIG_PACKAGE_iptables-mod-dnetmap=m
@@ -489,6 +516,7 @@ CONFIG_PACKAGE_iptables-mod-fuzzy=m
 CONFIG_PACKAGE_iptables-mod-geoip=m
 CONFIG_PACKAGE_iptables-mod-hashlimit=m
 CONFIG_PACKAGE_iptables-mod-iface=m
+CONFIG_PACKAGE_iptables-mod-imq=m
 CONFIG_PACKAGE_iptables-mod-ipmark=m
 CONFIG_PACKAGE_iptables-mod-ipopt=m
 CONFIG_PACKAGE_iptables-mod-ipp2p=m
@@ -516,7 +544,6 @@ CONFIG_PACKAGE_iptables-mod-tproxy=m
 CONFIG_PACKAGE_iptables-mod-trace=m
 CONFIG_PACKAGE_iptables-mod-u32=m
 CONFIG_PACKAGE_iptables-mod-ulog=m
-CONFIG_PACKAGE_iptables-nft=m
 CONFIG_PACKAGE_iptaccount=m
 CONFIG_PACKAGE_iptgeoip=m
 CONFIG_PACKAGE_miniupnpc=m
@@ -531,77 +558,44 @@ CONFIG_PACKAGE_shorewall-lite=m
 CONFIG_PACKAGE_shorewall6=m
 CONFIG_PACKAGE_shorewall6-lite=m
 CONFIG_PACKAGE_snort=m
+CONFIG_PACKAGE_iodine=m
+CONFIG_PACKAGE_iodined=m
 
 # 其他
 
 ## 挂载
 CONFIG_PACKAGE_block-mount=m
 
-## ssrp && passwall
+## SSRP & Passwall
+CONFIG_PACKAGE_ipt2socks=y
+CONFIG_PACKAGE_shadowsocks-rust-sslocal=y
+CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
+CONFIG_PACKAGE_shadowsocksr-libev-ssr-redir=y
+CONFIG_PACKAGE_xray-core=y
+xray-geodata
+CONFIG_PACKAGE_kcptun-client=m
+CONFIG_PACKAGE_naiveproxy=m
+CONFIG_PACKAGE_redsocks2=m
 CONFIG_PACKAGE_shadowsocks-libev-ss-local=m
 CONFIG_PACKAGE_shadowsocks-libev-ss-redir=m
+CONFIG_PACKAGE_shadowsocksr-libev-ssr-server=m
 CONFIG_PACKAGE_simple-obfs=m
-CONFIG_PACKAGE_shadowsocksr-libev-server=m
-CONFIG_PACKAGE_redsocks2=m
-CONFIG_PACKAGE_chinadns-ng=m
 CONFIG_PACKAGE_trojan=m
-CONFIG_PACKAGE_trojan-go=m
+CONFIG_PACKAGE_v2ray-plugin=m
+CONFIG_PACKAGE_shadowsocks-libev-ss-server=m
 CONFIG_PACKAGE_trojan-plus=m
-CONFIG_PACKAGE_kcptun-client=m
-CONFIG_PACKAGE_v2ray-plugin=n
-CONFIG_PACKAGE_naiveproxy=m
-CONFIG_PACKAGE_https-dns-proxy=m
-CONFIG_PACKAGE_xray=m
-CONFIG_PACKAGE_v2ray=m
+CONFIG_PACKAGE_trojan-go=m
 CONFIG_PACKAGE_brook=m
+CONFIG_PACKAGE_haproxy=m
+CONFIG_PACKAGE_chinadns-ng=m
+CONFIG_PACKAGE_dns2socks=m
 
 ## 网易云
-CONFIG_PACKAGE_UnblockNeteaseMusicGo=m
+CONFIG_PACKAGE_UnblockNeteaseMusic=m
+CONFIG_PACKAGE_UnblockNeteaseMusic-Go=m
 
 ## bind-tools
 CONFIG_PACKAGE_bind-tools=m
-
-## DDNS
-CONFIG_PACKAGE_ddns-scripts=m
-CONFIG_PACKAGE_ddns-scripts_aliyun=m
-CONFIG_PACKAGE_ddns-scripts_cloudflare.com-v4=m
-CONFIG_PACKAGE_ddns-scripts_dnspod=m
-CONFIG_PACKAGE_ddns-scripts_freedns_42_pl=m
-CONFIG_PACKAGE_ddns-scripts_godaddy.com-v1=m
-CONFIG_PACKAGE_ddns-scripts_no-ip_com=m
-CONFIG_PACKAGE_ddns-scripts_nsupdate=m
-CONFIG_PACKAGE_ddns-scripts_route53-v1=m
-
-## SQM
-CONFIG_PACKAGE_sqm-scripts=m
-CONFIG_PACKAGE_sqm-scripts-extra=m
-
-## 杂七杂八
-CONFIG_PACKAGE_iperf3-ssl=m
-CONFIG_PACKAGE_lrzsz=m
-CONFIG_PACKAGE_lscpu=m
-CONFIG_PACKAGE_lsof=m
-CONFIG_PACKAGE_pciutils=m
-CONFIG_PACKAGE_usbutils=m
-CONFIG_PACKAGE_xl2tpd=m
-CONFIG_PACKAGE_ppp-mod-pptp=m
-CONFIG_PACKAGE_bash=m
-CONFIG_PACKAGE_iputils-arping=m
-CONFIG_PACKAGE_iputils-clockdiff=m
-CONFIG_PACKAGE_iputils-ping=m
-CONFIG_PACKAGE_iputils-ping6=m
-CONFIG_PACKAGE_iputils-tftpd=m
-CONFIG_PACKAGE_iputils-tracepath=m
-CONFIG_PACKAGE_iputils-tracepath6=m
-CONFIG_PACKAGE_open-vm-tools-fuse=m
-CONFIG_PACKAGE_qume-ga=m
-CONFIG_PACKAGE_snmpd=m
-CONFIG_PACKAGE_subconverter=m
-CONFIG_PACKAGE_qemu-ga=m
-CONFIG_PACKAGE_cfdisk=m
-CONFIG_PACKAGE_usb-modeswith=m
-CONFIG_PACKAGE_asterisk=m
-
 
 # 必备
 CONFIG_PACKAGE_openssh-sftp-server=y
@@ -612,7 +606,6 @@ CONFIG_PACKAGE_e2fsprogs=y
 CONFIG_PACKAGE_mkf2fs=y
 CONFIG_PACKAGE_acpid=y
 CONFIG_PACKAGE_iputils-traceroute6=y
-
 
 # 添加emmc支持
 CONFIG_kmod-sdhci=y
